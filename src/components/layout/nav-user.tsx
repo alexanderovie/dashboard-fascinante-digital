@@ -38,9 +38,9 @@ export function NavUser({ user }: Props) {
   const { isMobile } = useSidebar()
 
   // Construir URL completa para logout (Auth0 requiere URL absoluta)
+  // Redirigir al dominio raíz: fascinantedigital.com
   const logoutUrl = useMemo(() => {
-    if (typeof window === 'undefined') return '/api/auth/logout?returnTo=/login'
-    const returnTo = encodeURIComponent(`${window.location.origin}/login`)
+    const returnTo = encodeURIComponent('https://fascinantedigital.com')
     return `/api/auth/logout?returnTo=${returnTo}`
   }, [])
 
