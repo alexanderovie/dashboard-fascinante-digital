@@ -8,6 +8,7 @@ import {
   LogOut,
 } from "lucide-react"
 import Link from "next/link"
+import { useMemo } from "react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   DropdownMenu,
@@ -35,6 +36,13 @@ interface Props {
 
 export function NavUser({ user }: Props) {
   const { isMobile } = useSidebar()
+
+  // Construir URL completa para logout (Auth0 requiere URL absoluta)
+  const logoutUrl = useMemo(() => {
+    if (typeof window === 'undefined') return '/api/auth/logout?returnTo=/login'
+    const returnTo = encodeURIComponent(`${window.location.origin}/login`)
+    return `/api/auth/logout?returnTo=${returnTo}`
+  }, [])
 
   return (
     <SidebarMenu>
@@ -97,7 +105,7 @@ export function NavUser({ user }: Props) {
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              <Link href="/api/auth/logout?returnTo=/login">
+              <Link href={logoutUrl}>
                 <LogOut />
                 Log out
               </Link>
