@@ -1,8 +1,9 @@
-"use client"
+ "use client"
 
 import { useEffect, useState } from "react"
 import SearchProvider from "@/components/search-provider"
 import { ThemeProvider } from "@/components/theme-provider"
+import { AuthProvider } from "@/providers/auth-provider"
 
 interface Props {
   children: React.ReactNode
@@ -29,7 +30,9 @@ export function Providers({ children }: Props) {
       enableSystem
       disableTransitionOnChange
     >
-      <SearchProvider value={{ open, setOpen }}>{children}</SearchProvider>
+      <SearchProvider value={{ open, setOpen }}>
+        <AuthProvider>{children}</AuthProvider>
+      </SearchProvider>
     </ThemeProvider>
   )
 }

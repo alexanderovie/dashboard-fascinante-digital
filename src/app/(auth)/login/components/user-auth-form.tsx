@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form"
 import { IconBrandFacebook, IconBrandGithub } from "@tabler/icons-react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import Link from "next/link"
-import { nofitySubmittedValues } from "@/lib/notify-submitted-values"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -35,6 +34,20 @@ const formSchema = z.object({
     }),
 })
 
+const buildAuthUrl = (hint?: string) => {
+  if (typeof window === "undefined") {
+    return "/api/auth/login"
+  }
+
+  const loginUrl = new URL("/api/auth/login", window.location.origin)
+  loginUrl.searchParams.set("returnTo", "/")
+  if (hint) {
+    loginUrl.searchParams.set("screen_hint", hint)
+  }
+
+  return loginUrl.toString()
+}
+
 export function UserAuthForm({
   className,
   ...props
@@ -49,13 +62,13 @@ export function UserAuthForm({
     },
   })
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
+  const redirectToAuth = (screenHint?: string) => {
     setIsLoading(true)
-    nofitySubmittedValues(data)
+    window.location.assign(buildAuthUrl(screenHint))
+  }
 
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
+  function onSubmit() {
+    redirectToAuth()
   }
 
   return (
@@ -118,6 +131,7 @@ export function UserAuthForm({
                 className="w-full"
                 type="button"
                 disabled={isLoading}
+                onClick={() => redirectToAuth()}
               >
                 <IconBrandGithub className="h-4 w-4" /> GitHub
               </Button>
@@ -126,6 +140,7 @@ export function UserAuthForm({
                 className="w-full"
                 type="button"
                 disabled={isLoading}
+                onClick={() => redirectToAuth()}
               >
                 <IconBrandFacebook className="h-4 w-4" />
                 Facebook
