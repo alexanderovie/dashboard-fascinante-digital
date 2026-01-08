@@ -1,6 +1,5 @@
 import { ForwardRefExoticComponent, RefAttributes } from "react"
 import {
-  Icon,
   IconGift,
   IconMenuOrder,
   IconProps,
@@ -75,5 +74,5 @@ export type Dashboard2Stats = {
     value: number
   }[]
   strokeColor: string
-  icon: ForwardRefExoticComponent<IconProps & RefAttributes<Icon>>
+  icon: ForwardRefExoticComponent<IconProps & RefAttributes<SVGSVGElement>>
 }

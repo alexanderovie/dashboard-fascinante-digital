@@ -1,0 +1,121 @@
+/**
+ * EJEMPLO DE IMPLEMENTACIÓN MEJORADA DEL DASHBOARD LAYOUT
+ *
+ * Este archivo muestra cómo implementar el layout del dashboard
+ * con las mejoras de seguridad de FASE 1 y FASE 2
+ *
+ * CAMBIOS PRINCIPALES:
+ * 1. Usa getCurrentUser() para obtener usuario real (no hardcoded)
+ * 2. Valida pertenencia a organización
+ * 3. Maneja errores de autenticación correctamente
+ * 4. Pasa usuario real a componentes
+ *
+ * INSTRUCCIONES:
+ * 1. Revisar este código
+ * 2. Copiar a layout.tsx cuando esté listo
+ * 3. Eliminar este archivo .example
+ */
+
+import { cookies } from "next/headers"
+import { redirect } from "next/navigation"
+import { cn } from "@/lib/utils"
+import { SidebarProvider } from "@/components/ui/sidebar"
+import { AppSidebar } from "@/components/layout/app-sidebar"
+import { ApiClientError, authenticatedFetch } from "@/lib/api-client"
+import { getCurrentUser, getCurrentOrgId } from "@/lib/auth/session"
+
+interface Props {
+  children: React.ReactNode
+}
+
+export default async function DashboardLayout({ children }: Props) {
+  const cookieStore = await cookies()
+  const defaultClose = cookieStore.get("sidebar:state")?.value === "false"
+
+  // ============================================================================
+  // FASE 1: Obtener usuario real de Auth0
+  // ============================================================================
+
+  const user = await getCurrentUser()
+
+  // Si no hay usuario (no debería pasar por middleware, pero por seguridad)
+  if (!user) {
+    redirect("/login")
+  }
+
+  // ============================================================================
+  // FASE 3: Validar organización (multi-tenant)
+  // ============================================================================
+
+  // Obtener org_id del usuario o de la cookie
+  const orgId = await getCurrentOrgId() ?? process.env.DEFAULT_ORGANIZATION_ID
+
+  if (!orgId) {
+    // Usuario sin organización asignada
+    redirect("/onboarding/select-organization")
+  }
+
+  // ============================================================================
+  // Validar acceso a la API (healthcheck)
+  // ============================================================================
+
+  try {
+    // Llamar a /v1/me para verificar que el usuario puede acceder
+    await authenticatedFetch("/v1/me", {
+      organizationId: orgId,
+    })
+  } catch (error) {
+    if (error instanceof ApiClientError) {
+      if (error.status === 401) {
+        // Token expirado o inválido → forzar re-login
+        redirect("/api/auth/logout?returnTo=/login")
+      }
+      if (error.status === 403) {
+        // Usuario no tiene acceso a esta organización
+        redirect("/403?reason=org_access")
+      }
+      if (error.status === 429) {
+        // Rate limit excedido
+        redirect("/429?reason=rate_limit")
+      }
+    }
+
+    // Otros errores (500, network, etc.)
+    console.error("[Dashboard Layout] API error:", error)
+    throw error
+  }
+
+  // ============================================================================
+  // Transformar usuario para el formato esperado por AppSidebar
+  // ============================================================================
+
+  const sidebarUser = {
+    name: user.name || "Usuario",
+    email: user.email || "",
+    avatar: user.picture || "/avatars/default.png",
+    // Agregar datos adicionales si es necesario
+    orgId: user["https://fascinante.com/org_id"],
+    roles: user["https://fascinante.com/roles"] || [],
+  }
+
+  return (
+    <div className="border-grid flex flex-1 flex-col">
+      <SidebarProvider defaultOpen={!defaultClose}>
+        {/* Pasar usuario REAL en lugar de datos hardcoded */}
+        <AppSidebar user={sidebarUser} />
+
+        <div
+          id="content"
+          className={cn(
+            "flex h-full w-full flex-col",
+            "has-[div[data-layout=fixed]]:h-svh",
+            "group-data-[scroll-locked=1]/body:h-full",
+            "has-[data-layout=fixed]:group-data-[scroll-locked=1]/body:h-svh"
+          )}
+        >
+          {children}
+        </div>
+      </SidebarProvider>
+    </div>
+  )
+}

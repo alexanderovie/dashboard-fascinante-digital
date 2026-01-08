@@ -11,7 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 interface Props {
   label: string
-  icon: ForwardRefExoticComponent<IconProps & RefAttributes<Icon>>
+  icon: ForwardRefExoticComponent<IconProps & RefAttributes<SVGSVGElement>>
   percentage: number
   type: "up" | "down"
   sign?: "money" | "number"

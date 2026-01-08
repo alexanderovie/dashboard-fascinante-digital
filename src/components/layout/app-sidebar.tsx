@@ -12,7 +12,24 @@ import { NavUser } from "@/components/layout/nav-user"
 import { TeamSwitcher } from "@/components/layout/team-switcher"
 import { sidebarData } from "./data/sidebar-data"
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
+  user?: {
+    name: string
+    email: string
+    avatar?: string
+  }
+}
+
+export function AppSidebar({ user, ...props }: AppSidebarProps) {
+  // Usar usuario real si está disponible, sino usar datos hardcodeados como fallback
+  const displayUser = user
+    ? {
+        name: user.name,
+        email: user.email,
+        avatar: user.avatar || sidebarData.user.avatar
+      }
+    : sidebarData.user
+
   return (
     <div className="relative">
       <Sidebar collapsible="icon" {...props}>
@@ -25,7 +42,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           ))}
         </SidebarContent>
         <SidebarFooter>
-          <NavUser user={sidebarData.user} />
+          <NavUser user={displayUser} />
         </SidebarFooter>
         <SidebarRail />
       </Sidebar>

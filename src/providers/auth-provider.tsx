@@ -10,4 +10,3 @@ interface AuthProviderProps {
 export function AuthProvider({ children }: AuthProviderProps) {
   return <Auth0Provider>{children}</Auth0Provider>
 }
-

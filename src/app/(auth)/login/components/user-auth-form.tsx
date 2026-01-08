@@ -34,13 +34,16 @@ const formSchema = z.object({
     }),
 })
 
-const buildAuthUrl = (hint?: string) => {
+const buildAuthUrl = (hint?: string, returnTo?: string) => {
   if (typeof window === "undefined") {
     return "/api/auth/login"
   }
 
   const loginUrl = new URL("/api/auth/login", window.location.origin)
-  loginUrl.searchParams.set("returnTo", "/")
+  // ✅ Usar returnTo del query param si existe, sino usar "/"
+  // Esto respeta la ruta original que el usuario intentaba acceder
+  const targetUrl = returnTo || new URLSearchParams(window.location.search).get("returnTo") || "/"
+  loginUrl.searchParams.set("returnTo", targetUrl)
   if (hint) {
     loginUrl.searchParams.set("screen_hint", hint)
   }
@@ -48,10 +51,15 @@ const buildAuthUrl = (hint?: string) => {
   return loginUrl.toString()
 }
 
+interface UserAuthFormProps extends HTMLAttributes<HTMLDivElement> {
+  returnTo?: string
+}
+
 export function UserAuthForm({
   className,
+  returnTo,
   ...props
-}: HTMLAttributes<HTMLDivElement>) {
+}: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -64,7 +72,7 @@ export function UserAuthForm({
 
   const redirectToAuth = (screenHint?: string) => {
     setIsLoading(true)
-    window.location.assign(buildAuthUrl(screenHint))
+    window.location.assign(buildAuthUrl(screenHint, returnTo))
   }
 
   function onSubmit() {

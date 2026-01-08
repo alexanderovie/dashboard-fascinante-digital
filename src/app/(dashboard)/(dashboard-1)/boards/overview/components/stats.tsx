@@ -7,6 +7,7 @@ import {
 } from "@tabler/icons-react"
 import { Line, LineChart } from "recharts"
 import { cn } from "@/lib/utils"
+import { formatNumber, formatPercentage } from "@/lib/utils/format-number"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ChartConfig, ChartContainer } from "@/components/ui/chart"
 import {
@@ -66,7 +67,7 @@ function StatsCard({
       <CardContent className="flex h-[calc(100%_-_48px)] flex-col justify-between py-4">
         <div className="flex flex-col">
           <div className="flex flex-wrap items-center justify-between gap-6">
-            <div className="text-3xl font-bold">{stats.toLocaleString()}</div>
+            <div className="text-3xl font-bold">{formatNumber(stats)}</div>
             <ChartContainer className="w-[70px]" config={chartConfig}>
               <LineChart accessibilityLayer data={chartData}>
                 <Line
@@ -91,7 +92,7 @@ function StatsCard({
             })}
           >
             <p className={"text-[13px] leading-none font-medium"}>
-              {percentage.toLocaleString()}%
+              {formatPercentage(percentage)}
             </p>
             {type === "up" ? (
               <IconCaretUpFilled size={18} />

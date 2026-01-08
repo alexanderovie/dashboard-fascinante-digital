@@ -57,4 +57,3 @@ export function getAuth0Client() {
 
   return cachedClient
 }
-

@@ -28,7 +28,16 @@ export async function authenticatedFetch<T = unknown>(
   const audience =
     options.audience ?? process.env.AUTH0_AUDIENCE ?? "https://api.fascinantedigital.com"
 
-  const accessToken = await getAccessToken({ audience })
+  // Obtener access token de forma segura
+  let accessToken: string | undefined
+  try {
+    accessToken = await getAccessToken({ audience })
+  } catch (error) {
+    // Si falla al obtener token (ej: error de URL parsing), retornar 401
+    console.error("[ApiClient] Error obteniendo access token:", error)
+    throw new ApiClientError("No access token available", 401)
+  }
+
   if (!accessToken) {
     throw new ApiClientError("No access token available", 401)
   }
@@ -63,4 +72,3 @@ export async function authenticatedFetch<T = unknown>(
     return payload as T
   }
 }
-

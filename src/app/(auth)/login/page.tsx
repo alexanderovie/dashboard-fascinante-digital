@@ -1,34 +1,49 @@
-import { Card } from "@/components/ui/card"
-import { UserAuthForm } from "./components/user-auth-form"
+import { redirect } from "next/navigation"
+import { getCurrentUser } from "@/lib/auth/session"
 
-export default function LoginPage() {
-  return (
-    <Card className="p-6">
-      <div className="flex flex-col space-y-2 text-left">
-        <h1 className="text-2xl font-semibold tracking-tight">Login</h1>
-        <p className="text-muted-foreground text-sm">
-          Enter your email and password below <br />
-          to log into your account
-        </p>
-      </div>
-      <UserAuthForm />
-      <p className="text-muted-foreground mt-4 px-8 text-center text-sm">
-        By clicking login, you agree to our{" "}
-        <a
-          href="/terms"
-          className="hover:text-primary underline underline-offset-4"
-        >
-          Terms of Service
-        </a>{" "}
-        and{" "}
-        <a
-          href="/privacy"
-          className="hover:text-primary underline underline-offset-4"
-        >
-          Privacy Policy
-        </a>
-        .
-      </p>
-    </Card>
-  )
+// Forzar renderizado dinámico (necesario porque usamos cookies)
+export const dynamic = "force-dynamic"
+
+interface LoginPageProps {
+  searchParams?: Promise<{ returnTo?: string }>
+}
+
+/**
+ * Página de login que redirige automáticamente a Auth0 Universal Login.
+ *
+ * ✅ PATRÓN RECOMENDADO (Enterprise):
+ * - No muestra UI propia
+ * - Redirige inmediatamente a Auth0
+ * - Auth0 maneja todo (email/password, MFA, reset, etc.)
+ *
+ * Flujo:
+ * 1. Usuario visita /login
+ * 2. Si ya está autenticado → redirect al dashboard
+ * 3. Si no está autenticado → redirect a /api/auth/login (Auth0)
+ * 4. Auth0 Universal Login aparece (sin mostrar nuestra UI)
+ */
+export default async function LoginPage({ searchParams }: LoginPageProps) {
+  // ✅ Si el usuario ya está autenticado, redirigir al dashboard o ruta original
+  const user = await getCurrentUser()
+  const params = await searchParams
+  const returnTo = params?.returnTo || "/"
+
+  if (user) {
+    // Usuario ya autenticado, redirigir al dashboard o ruta original
+    redirect(returnTo)
+  }
+
+  // ✅ Redirigir automáticamente a Auth0 Universal Login
+  // El endpoint /api/auth/login manejará:
+  // - Construcción de URL de Auth0
+  // - PKCE, state, etc.
+  // - Redirect a Universal Login
+  //
+  // Respeta returnTo si existe (se pasa como query param)
+  const loginPath = returnTo !== "/"
+    ? `/api/auth/login?returnTo=${encodeURIComponent(returnTo)}`
+    : "/api/auth/login"
+
+  // Redirect automático (sin mostrar UI)
+  redirect(loginPath)
 }
