@@ -1,4 +1,4 @@
-# Shadcnblocks.com - Admin Kit
+# Fascinante Digital
 
 A premium Shadcn admin dashboard by shadcnblocks.com
 
