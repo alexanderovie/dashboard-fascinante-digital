@@ -10,14 +10,14 @@ Este es un **Access Token** de tipo **Machine to Machine (M2M)** obtenido median
 
 ### Datos Decodificados:
 
-- **Issuer (iss)**: `https://dev-xz2zgl2c0w6gfvbk.us.auth0.com/`
+- **Issuer (iss)**: `<AUTH0_ISSUER_BASE_URL>/`
   - Tu tenant de Auth0
 
 - **Subject (sub)**: `ImAZkxhgekDXzV6tqNyVMXnqJxAHkUQ1@clients`
   - Client ID de "Fascinante API M2M (DEV)"
   - Indica que es un token para aplicación M2M (no para usuario)
 
-- **Audience (aud)**: `https://api.fascinantedigital.com`
+- **Audience (aud)**: `<AUTH0_AUDIENCE>`
   - Tu API backend (Fascinante API)
   - Este token es válido para llamar a esta API
 
@@ -39,7 +39,7 @@ Este es un **Access Token** de tipo **Machine to Machine (M2M)** obtenido median
 
 1. **Llamar a tu API Backend** (Fascinante API)
    ```javascript
-   fetch('https://api.fascinantedigital.com/v1/users', {
+   fetch('<AUTH0_AUDIENCE>/v1/users', {
      headers: {
        'Authorization': `Bearer ${accessToken}`
      }
@@ -80,7 +80,7 @@ Este es un **Access Token** de tipo **Machine to Machine (M2M)** obtenido median
 // ✅ CORRECTO: Llamar a tu API backend
 async function fetchData() {
   try {
-    const response = await fetch('https://api.fascinantedigital.com/v1/users', {
+    const response = await fetch('<AUTH0_AUDIENCE>/v1/users', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${accessToken}`
@@ -106,12 +106,12 @@ async function fetchData() {
 ### Opción 1: Con curl
 
 ```bash
-curl -X POST https://dev-xz2zgl2c0w6gfvbk.us.auth0.com/oauth/token \
+curl -X POST <AUTH0_ISSUER_BASE_URL>/oauth/token \
   -H "Content-Type: application/json" \
   -d '{
     "client_id": "ImAZkxhgekDXzV6tqNyVMXnqJxAHkUQ1",
     "client_secret": "TU_CLIENT_SECRET",
-    "audience": "https://api.fascinantedigital.com",
+    "audience": "<AUTH0_AUDIENCE>",
     "grant_type": "client_credentials"
   }'
 ```
@@ -126,11 +126,11 @@ const axios = require('axios');
 
 async function getAccessToken() {
   const response = await axios.post(
-    'https://dev-xz2zgl2c0w6gfvbk.us.auth0.com/oauth/token',
+    '<AUTH0_ISSUER_BASE_URL>/oauth/token',
     {
       client_id: 'ImAZkxhgekDXzV6tqNyVMXnqJxAHkUQ1',
       client_secret: 'TU_CLIENT_SECRET',
-      audience: 'https://api.fascinantedigital.com',
+      audience: '<AUTH0_AUDIENCE>',
       grant_type: 'client_credentials'
     }
   );
@@ -174,7 +174,7 @@ Este token es **diferente** del que usa tu dashboard Next.js:
 | **Grant Type** | client_credentials | authorization_code |
 | **Requiere usuario** | ❌ NO | ✅ SÍ |
 | **Uso** | Backend scripts | Frontend/Backend con usuario |
-| **Audience** | https://api.fascinantedigital.com | https://api.fascinantedigital.com |
+| **Audience** | <AUTH0_AUDIENCE> | <AUTH0_AUDIENCE> |
 
 ---
 
@@ -182,7 +182,7 @@ Este token es **diferente** del que usa tu dashboard Next.js:
 
 Este token:
 - ✅ Es un **Access Token M2M** válido
-- ✅ Es para llamar a **Fascinante API** (`https://api.fascinantedigital.com`)
+- ✅ Es para llamar a **Fascinante API** (`<AUTH0_AUDIENCE>`)
 - ✅ Obtenido con "Fascinante API M2M (DEV)"
 - ✅ Válido por ~24 horas
 - ✅ Para uso en backend/servidor (no frontend)

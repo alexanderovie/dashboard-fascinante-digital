@@ -23,7 +23,7 @@
    ↓
 2. Tu app redirige a /api/auth/login (Auth0 SDK)
    ↓
-3. Auth0 redirige a Universal Login (hosted en auth.fascinantedigital.com)
+3. Auth0 redirige a Universal Login (hosted en <AUTH0_DOMAIN>)
    ↓
 4. Usuario se autentica en Auth0
    ↓

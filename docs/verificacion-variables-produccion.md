@@ -12,10 +12,10 @@
 | `AUTH0_CLIENT_ID` | `FVcaHC6WkzqZLMdiSWvISUMmqWuzRtE7` | ✅ |
 | `AUTH0_CLIENT_SECRET` | `***` (encriptado) | ✅ |
 | `AUTH0_SECRET` | `***` (encriptado) | ✅ |
-| `AUTH0_DOMAIN` | `dev-xz2zgl2c0w6gfvbk.us.auth0.com` | ✅ |
-| `AUTH0_ISSUER_BASE_URL` | `https://dev-xz2zgl2c0w6gfvbk.us.auth0.com` | ✅ |
-| `AUTH0_AUDIENCE` | `https://api.fascinantedigital.com` | ✅ |
-| `NEXT_PUBLIC_API_BASE_URL` | `https://api.fascinantedigital.com` | ✅ |
+| `AUTH0_DOMAIN` | `<AUTH0_DOMAIN>` | ✅ |
+| `AUTH0_ISSUER_BASE_URL` | `<AUTH0_ISSUER_BASE_URL>` | ✅ |
+| `AUTH0_AUDIENCE` | `<AUTH0_AUDIENCE>` | ✅ |
+| `NEXT_PUBLIC_API_BASE_URL` | `<AUTH0_AUDIENCE>` | ✅ |
 | `DEFAULT_ORGANIZATION_ID` | (vacío) | ✅ |
 | `VERCEL_OIDC_TOKEN` | (generado automáticamente) | ✅ |
 

@@ -49,7 +49,7 @@ El CLI te pedirá:
 
 1. **Domain:**
    ```
-   auth.fascinantedigital.com
+   <AUTH0_DOMAIN>
    ```
 
 2. **Client ID:**
@@ -107,7 +107,7 @@ auth0 api get /api/v2/clients
 Si prefieres no usar `auth0 login`, puedes configurar variables de entorno:
 
 ```bash
-export AUTH0_DOMAIN=auth.fascinantedigital.com
+export AUTH0_DOMAIN=<AUTH0_DOMAIN>
 export AUTH0_CLIENT_ID=ImAZkxhgekDXV6tqNyVMXnqJxAHkUQ1
 export AUTH0_CLIENT_SECRET=tu_secret_m2m
 ```
@@ -116,7 +116,7 @@ O agregar a `.env.local` y cargar:
 
 ```bash
 # En .env.local
-AUTH0_DOMAIN=auth.fascinantedigital.com
+AUTH0_DOMAIN=<AUTH0_DOMAIN>
 AUTH0_M2M_CLIENT_ID=ImAZkxhgekDXV6tqNyVMXnqJxAHkUQ1
 AUTH0_M2M_CLIENT_SECRET=tu_secret_m2m
 ```
@@ -151,7 +151,7 @@ Asegúrate de que la aplicación M2M tenga permisos en Management API:
 ## 📋 Checklist
 
 - [ ] Seleccionar "As a machine" en `auth0 login`
-- [ ] Proporcionar domain: `auth.fascinantedigital.com`
+- [ ] Proporcionar domain: `<AUTH0_DOMAIN>`
 - [ ] Proporcionar Client ID: `ImAZkxhgekDXV6tqNyVMXnqJxAHkUQ1`
 - [ ] Obtener Client Secret de la aplicación M2M
 - [ ] Verificar permisos en Management API

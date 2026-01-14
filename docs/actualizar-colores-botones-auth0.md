@@ -67,7 +67,7 @@ node scripts/update-auth0-branding.js
    - El botón debería mostrar color `#0F172A`
 
 2. **Login Real:**
-   - Abre: `https://auth.fascinantedigital.com/authorize`
+   - Abre: `<AUTH0_ISSUER_BASE_URL>/authorize`
    - El botón "Iniciar sesión" debería tener el mismo color que tus botones del dashboard
 
 ---
@@ -109,7 +109,7 @@ Tu color `#F8FAFC` (casi blanco) será el resultado natural cuando Auth0 calcula
    - Fondo: `#0F172A`
 
 2. **Botón de Auth0:**
-   - Abre: `https://auth.fascinantedigital.com/authorize`
+   - Abre: `<AUTH0_ISSUER_BASE_URL>/authorize`
    - Inspecciona el botón "Iniciar sesión"
    - Fondo: `#0F172A`
 

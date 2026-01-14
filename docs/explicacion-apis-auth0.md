@@ -5,10 +5,10 @@
 
 ## 📊 Las 2 APIs que ves
 
-### 1. **Fascinante API** (`https://api.fascinantedigital.com`)
+### 1. **Fascinante API** (`<AUTH0_AUDIENCE>`)
 **Status:** ❌ Unauthorized (actualmente)
 
-### 2. **Auth0 Management API** (`https://dev-xz2zgl2c0w6gfvbk.us.auth0.com/api/v2/`)
+### 2. **Auth0 Management API** (`<AUTH0_ISSUER_BASE_URL>/api/v2/`)
 **Status:** ❌ Unauthorized (actualmente)
 
 ---
@@ -30,11 +30,11 @@ En tu código:
 // src/lib/api-client.ts (línea 28-29)
 const audience = options.audience ??
   process.env.AUTH0_AUDIENCE ??
-  "https://api.fascinantedigital.com"
+  "<AUTH0_AUDIENCE>"
 
 // src/lib/auth/auth0-client.ts (línea 38)
 authorizationParameters: {
-  audience: process.env.AUTH0_AUDIENCE ?? "https://api.fascinantedigital.com"
+  audience: process.env.AUTH0_AUDIENCE ?? "<AUTH0_AUDIENCE>"
 }
 ```
 
@@ -43,7 +43,7 @@ authorizationParameters: {
 ```
 1. Usuario se autentica en Next.js
    ↓
-2. Next.js pide access token con audience="https://api.fascinantedigital.com"
+2. Next.js pide access token con audience="<AUTH0_AUDIENCE>"
    ↓
 3. Auth0 genera token solo si la aplicación está autorizada para esta API
    ↓

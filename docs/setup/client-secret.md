@@ -101,7 +101,7 @@ auth0 apps secret rotate FVcaHC6WkzqZLMdiSWvISUMmqWuzRtE7
 
 ## 🔗 ENLACES ÚTILES
 
-- **Dashboard Directo**: https://manage.auth0.com/dashboard/us/dev-xz2zgl2c0w6gfvbk/applications/FVcaHC6WkzqZLMdiSWvISUMmqWuzRtE7/settings
+- **Dashboard Directo**: https://manage.auth0.com/dashboard/us/<AUTH0_DOMAIN>/applications/FVcaHC6WkzqZLMdiSWvISUMmqWuzRtE7/settings
 - **Auth0 CLI Docs**: https://auth0.github.io/auth0-cli
 - **Documentación Auth0**: https://auth0.com/docs
 
@@ -112,9 +112,9 @@ auth0 apps secret rotate FVcaHC6WkzqZLMdiSWvISUMmqWuzRtE7
 Ya configurado en `.env.local`:
 - ✅ **AUTH0_CLIENT_ID**: `FVcaHC6WkzqZLMdiSWvISUMmqWuzRtE7`
 - ✅ **AUTH0_SECRET**: `xxZSPtN7fYvxURRqgazY29O4i2rxoFlM6ITk+zs/VfQ=`
-- ✅ **AUTH0_DOMAIN**: `dev-xz2zgl2c0w6gfvbk.us.auth0.com`
-- ✅ **AUTH0_ISSUER_BASE_URL**: `https://dev-xz2zgl2c0w6gfvbk.us.auth0.com`
-- ✅ **AUTH0_AUDIENCE**: `https://api.fascinantedigital.com`
+- ✅ **AUTH0_DOMAIN**: `<AUTH0_DOMAIN>`
+- ✅ **AUTH0_ISSUER_BASE_URL**: `<AUTH0_ISSUER_BASE_URL>`
+- ✅ **AUTH0_AUDIENCE**: `<AUTH0_AUDIENCE>`
 - ⏳ **AUTH0_CLIENT_SECRET**: Obtener desde Dashboard ← **PENDIENTE**
 
 ---

@@ -25,12 +25,12 @@ auth0 login
 **Después del login**, verás:
 ```
 ▸ Successfully logged in.
-▸ Tenant: tu-dominio.us.auth0.com
+▸ Tenant: <AUTH0_DOMAIN>
 ```
 
 **✅ Guarda estos valores**:
 - `Tenant` → Será tu `AUTH0_DOMAIN`
-- Ejemplo: `fascinante-dev.us.auth0.com`
+- Ejemplo: `<AUTH0_DOMAIN>`
 
 ---
 
@@ -77,7 +77,7 @@ auth0 apis create
 **Valores a ingresar**:
 
 1. **Name**: `Fascinante Digital API`
-2. **Identifier**: `https://api.fascinantedigital.com`
+2. **Identifier**: `<AUTH0_AUDIENCE>`
    - ⚠️ IMPORTANTE: Este será tu `AUTH0_AUDIENCE`
 3. **Signing Algorithm**: `RS256` (default)
 
@@ -116,9 +116,9 @@ AUTH0_CLIENT_ID=tu_client_id_aqui
 AUTH0_CLIENT_SECRET=tu_client_secret_aqui
 AUTH0_SECRET=tu_secret_generado_aqui
 AUTH0_BASE_URL=http://localhost:3000
-AUTH0_DOMAIN=tu-dominio.us.auth0.com
-AUTH0_ISSUER_BASE_URL=https://tu-dominio.us.auth0.com
-AUTH0_AUDIENCE=https://api.fascinantedigital.com
+AUTH0_DOMAIN=<AUTH0_DOMAIN>
+AUTH0_ISSUER_BASE_URL=<AUTH0_ISSUER_BASE_URL>
+AUTH0_AUDIENCE=<AUTH0_AUDIENCE>
 
 # Application
 APP_BASE_URL=http://localhost:3000

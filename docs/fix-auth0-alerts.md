@@ -25,19 +25,19 @@ Una o más conexiones en Auth0 están usando credenciales de desarrollo/prueba q
 
 ---
 
-### 2. ❌ "Iniciar sesión en dev-xz2zgl2c0w6gfvbk"
+### 2. ❌ "Iniciar sesión en <AUTH0_DOMAIN>"
 
 **Síntoma:**
 El login muestra el dominio antiguo de Auth0 en lugar del dominio personalizado:
 ```
 Bienvenido
-Iniciar sesión en dev-xz2zgl2c0w6gfvbk para continuar hacia Dashboard Fascinante Digital
+Iniciar sesión en <AUTH0_DOMAIN> para continuar hacia Dashboard Fascinante Digital
 ```
 
 **Debería mostrar:**
 ```
 Bienvenido
-Iniciar sesión en auth.fascinantedigital.com para continuar hacia Dashboard Fascinante Digital
+Iniciar sesión en <AUTH0_DOMAIN> para continuar hacia Dashboard Fascinante Digital
 ```
 
 **Causa:**
@@ -92,7 +92,7 @@ Para cada conexión social (Google, Facebook, Apple):
 #### Paso 1: Verificar configuración en Auth0 Dashboard
 
 1. Ve a **Branding** → **Custom Domains**
-2. Verifica que `auth.fascinantedigital.com` esté:
+2. Verifica que `<AUTH0_DOMAIN>` esté:
    - ✅ Verificado
    - ✅ Activo
    - ✅ Con TLS válido
@@ -111,12 +111,12 @@ En tu `.env.local` y **Vercel**:
 
 ```env
 # ✅ CORRECTO (dominio personalizado)
-AUTH0_DOMAIN=auth.fascinantedigital.com
-AUTH0_ISSUER_BASE_URL=https://auth.fascinantedigital.com
+AUTH0_DOMAIN=<AUTH0_DOMAIN>
+AUTH0_ISSUER_BASE_URL=<AUTH0_ISSUER_BASE_URL>
 
 # ❌ INCORRECTO (dominio antiguo)
-# AUTH0_DOMAIN=dev-xz2zgl2c0w6gfvbk.us.auth0.com
-# AUTH0_ISSUER_BASE_URL=https://dev-xz2zgl2c0w6gfvbk.us.auth0.com
+# AUTH0_DOMAIN=<AUTH0_DOMAIN>
+# AUTH0_ISSUER_BASE_URL=<AUTH0_ISSUER_BASE_URL>
 ```
 
 #### Paso 4: Limpiar cache
@@ -154,16 +154,16 @@ AUTH0_ISSUER_BASE_URL=https://auth.fascinantedigital.com
 
 2. Deberías ser redirigido a:
    ```
-   https://auth.fascinantedigital.com/authorize
+   <AUTH0_ISSUER_BASE_URL>/authorize
    ```
    **NO** a:
    ```
-   https://dev-xz2zgl2c0w6gfvbk.us.auth0.com/authorize
+   <AUTH0_ISSUER_BASE_URL>/authorize
    ```
 
 3. El login debería mostrar:
    ```
-   Iniciar sesión en auth.fascinantedigital.com
+   Iniciar sesión en <AUTH0_DOMAIN>
    ```
 
 ### Verificar que no hay credenciales de prueba

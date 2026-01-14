@@ -40,17 +40,17 @@
    - Ambiente: `production`, `preview`, `development`
 
 4. **AUTH0_DOMAIN**
-   - Valor: `dev-xz2zgl2c0w6gfvbk.us.auth0.com`
+   - Valor: `<AUTH0_DOMAIN>`
    - Tipo: Público
    - Ambiente: `production`, `preview`, `development`
 
 5. **AUTH0_ISSUER_BASE_URL**
-   - Valor: `https://dev-xz2zgl2c0w6gfvbk.us.auth0.com`
+   - Valor: `<AUTH0_ISSUER_BASE_URL>`
    - Tipo: Público
    - Ambiente: `production`, `preview`, `development`
 
 6. **AUTH0_AUDIENCE**
-   - Valor: `https://api.fascinantedigital.com`
+   - Valor: `<AUTH0_AUDIENCE>`
    - Tipo: Público
    - Ambiente: `production`, `preview`, `development`
 
@@ -67,8 +67,8 @@
    - Development: `http://localhost:3000`
 
 9. **NEXT_PUBLIC_API_BASE_URL**
-   - Production: `https://api.fascinantedigital.com`
-   - Preview: `https://api.fascinantedigital.com`
+   - Production: `<AUTH0_AUDIENCE>`
+   - Preview: `<AUTH0_AUDIENCE>`
    - Development: `http://localhost:4000`
 
 10. **DEFAULT_ORGANIZATION_ID** (Opcional)

@@ -32,7 +32,7 @@ const logoutUrl = useMemo(() => {
 
 ```http
 # ESTO NO necesitas hacer (el SDK lo hace por ti):
-GET https://auth.fascinantedigital.com/oidc/logout?
+GET <AUTH0_ISSUER_BASE_URL>/oidc/logout?
   id_token_hint={token}&
   post_logout_redirect_uri={url}
 ```

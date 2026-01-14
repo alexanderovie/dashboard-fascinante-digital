@@ -162,7 +162,7 @@ pnpm build
 
 **Mejora UX**:
 - Configura Custom Domain en Auth0 Dashboard
-- `auth.fascinantedigital.com` en vez de `dev-xz2zgl2c0w6gfvbk.us.auth0.com`
+- `<AUTH0_DOMAIN>` en vez de `<AUTH0_DOMAIN>`
 - Usuario siente que nunca sale de tu producto
 
 **Cómo**:

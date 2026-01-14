@@ -175,8 +175,8 @@ Browser → Auth0 → Browser (tokens en localStorage)
 ```bash
 AUTH0_CLIENT_ID=FVcaHC6WkzqZLMdiSWvISUMmqWuzRtE7  ✅
 AUTH0_CLIENT_SECRET=<secret-de-Dashboard-Fascinante-Digital>  ✅
-AUTH0_DOMAIN=dev-xz2zgl2c0w6gfvbk.us.auth0.com  ✅
-AUTH0_ISSUER_BASE_URL=https://dev-xz2zgl2c0w6gfvbk.us.auth0.com  ✅
+AUTH0_DOMAIN=<AUTH0_DOMAIN>  ✅
+AUTH0_ISSUER_BASE_URL=<AUTH0_ISSUER_BASE_URL>  ✅
 ```
 
 ---

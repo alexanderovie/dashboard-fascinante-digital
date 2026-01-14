@@ -2,8 +2,8 @@
 
 ## ✅ Estado Actual
 
-- **Custom Domain configurado:** `auth.fascinantedigital.com` → Status: Ready ✅
-- **Problema:** Login muestra `dev-xz2zgl2c0w6gfvbk` en lugar del dominio personalizado
+- **Custom Domain configurado:** `<AUTH0_DOMAIN>` → Status: Ready ✅
+- **Problema:** Login muestra `<AUTH0_DOMAIN>` en lugar del dominio personalizado
 
 ---
 
@@ -18,8 +18,8 @@ Las variables de entorno en Vercel pueden estar usando el dominio antiguo.
 1. Ve a **Vercel Dashboard** → Tu proyecto → **Settings** → **Environment Variables**
 2. Verifica que estas variables usen el dominio personalizado:
    ```env
-   AUTH0_DOMAIN=auth.fascinantedigital.com
-   AUTH0_ISSUER_BASE_URL=https://auth.fascinantedigital.com
+   AUTH0_DOMAIN=<AUTH0_DOMAIN>
+   AUTH0_ISSUER_BASE_URL=<AUTH0_ISSUER_BASE_URL>
    ```
 3. Si están incorrectas, actualízalas y haz un nuevo deploy
 
@@ -49,7 +49,7 @@ Las URLs de la aplicación en Auth0 Dashboard pueden estar usando el dominio ant
      https://app.fascinantedigital.com
      https://dashboard-fascinante-digital.vercel.app
      ```
-4. **IMPORTANTE:** Si alguna URL usa `dev-xz2zgl2c0w6gfvbk.us.auth0.com`, cámbiala
+4. **IMPORTANTE:** Si alguna URL usa `<AUTH0_DOMAIN>`, cámbiala
 
 ---
 
@@ -109,7 +109,7 @@ O manualmente en Vercel Dashboard:
    - Allowed Callback URLs
    - Allowed Logout URLs
    - Allowed Web Origins
-3. Asegúrate de que **NO** contengan `dev-xz2zgl2c0w6gfvbk.us.auth0.com`
+3. Asegúrate de que **NO** contengan `<AUTH0_DOMAIN>`
 
 ### Paso 3: Limpiar Cache
 
@@ -126,8 +126,8 @@ vercel --prod
 
 1. Abre navegador en modo incógnito
 2. Ve a: `http://localhost:3000/login` (local) o `https://app.fascinantedigital.com/login` (producción)
-3. Deberías ser redirigido a: `https://auth.fascinantedigital.com/authorize`
-4. El login debería mostrar: "Iniciar sesión en auth.fascinantedigital.com"
+3. Deberías ser redirigido a: `<AUTH0_ISSUER_BASE_URL>/authorize`
+4. El login debería mostrar: "Iniciar sesión en <AUTH0_DOMAIN>"
 
 ---
 
@@ -139,8 +139,8 @@ vercel --prod
 2. Haz login
 3. Busca la request a `/api/auth/login`
 4. Verifica la URL de redirect:
-   - ✅ Debe ser: `https://auth.fascinantedigital.com/authorize?...`
-   - ❌ NO debe ser: `https://dev-xz2zgl2c0w6gfvbk.us.auth0.com/authorize?...`
+   - ✅ Debe ser: `<AUTH0_ISSUER_BASE_URL>/authorize?...`
+   - ❌ NO debe ser: `https://<AUTH0_DOMAIN>/authorize?...`
 
 ### Verificar en Console
 

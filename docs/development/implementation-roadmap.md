@@ -240,7 +240,7 @@ pnpm dev
 
 #### ⬜ Tarea 1.5: Validar Organization Membership (Backend)
 
-**Nota**: Esta tarea requiere un endpoint en tu **backend externo** (`https://api.fascinantedigital.com`).
+**Nota**: Esta tarea requiere un endpoint en tu **backend externo** (`<AUTH0_AUDIENCE>`).
 
 **Backend (API externa - Express/Fastify)**:
 

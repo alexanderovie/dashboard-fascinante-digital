@@ -36,9 +36,24 @@ function loadEnvFile() {
 
 loadEnvFile();
 
+const requireEnv = (name) => {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(`Missing required env var: ${name}`);
+  }
+  return value;
+};
+
+const normalizeDomain = (value) => {
+  if (value.startsWith('http')) {
+    return new URL(value).hostname;
+  }
+  return value;
+};
+
 // Configuración
-const AUTH0_DOMAIN = process.env.AUTH0_DOMAIN || 'auth.fascinantedigital.com';
-const AUTH0_MANAGEMENT_TOKEN = process.env.AUTH0_MANAGEMENT_TOKEN || '';
+const AUTH0_DOMAIN = requireEnv('AUTH0_DOMAIN');
+const AUTH0_MANAGEMENT_TOKEN = requireEnv('AUTH0_MANAGEMENT_TOKEN');
 
 // Colores extraídos de src/app/globals.css (modo claro)
 // Mapeados a los campos requeridos por Auth0 Themes API
@@ -111,9 +126,7 @@ function makeRequest(url, options, payload = null) {
 
 // Obtener el tema por defecto
 async function getDefaultTheme() {
-  const domain = AUTH0_DOMAIN.startsWith('http')
-    ? new URL(AUTH0_DOMAIN).hostname
-    : AUTH0_DOMAIN;
+  const domain = normalizeDomain(AUTH0_DOMAIN);
 
   const apiUrl = `https://${domain}/api/v2/branding/themes/default`;
 
@@ -142,9 +155,7 @@ async function getDefaultTheme() {
 
 // Actualizar el tema con nuestros colores
 async function updateTheme(themeId, existingTheme) {
-  const domain = AUTH0_DOMAIN.startsWith('http')
-    ? new URL(AUTH0_DOMAIN).hostname
-    : AUTH0_DOMAIN;
+  const domain = normalizeDomain(AUTH0_DOMAIN);
 
   const apiUrl = `https://${domain}/api/v2/branding/themes/${themeId}`;
 
@@ -300,7 +311,7 @@ async function main() {
     console.log('📋 Próximos pasos:');
     console.log('   1. Ve a Auth0 Dashboard → Branding → Universal Login');
     console.log('   2. Verifica que los colores se vean correctos');
-    console.log('   3. Prueba el login: https://auth.fascinantedigital.com/authorize');
+    console.log(`   3. Prueba el login: https://${normalizeDomain(AUTH0_DOMAIN)}/authorize`);
     console.log('');
 
   } catch (error) {

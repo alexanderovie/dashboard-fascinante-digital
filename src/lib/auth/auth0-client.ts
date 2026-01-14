@@ -1,16 +1,11 @@
 import { Auth0Client } from "@auth0/nextjs-auth0/server"
 
-const getDomainFromIssuer = (issuer?: string) => {
-  if (!issuer) {
-    return process.env.AUTH0_DOMAIN
+const requireEnv = (name: string) => {
+  const value = process.env[name]
+  if (!value) {
+    throw new Error(`Missing required env var: ${name}`)
   }
-
-  try {
-    const url = new URL(issuer)
-    return url.hostname
-  } catch {
-    return issuer
-  }
+  return value
 }
 
 const appBaseUrl =
@@ -19,10 +14,10 @@ const appBaseUrl =
   process.env.NEXTAUTH_URL ??
   "http://localhost:3000"
 
-const domain = process.env.AUTH0_DOMAIN ?? getDomainFromIssuer(process.env.AUTH0_ISSUER_BASE_URL)
-const secret = process.env.AUTH0_SECRET
-const clientId = process.env.AUTH0_CLIENT_ID
-const clientSecret = process.env.AUTH0_CLIENT_SECRET
+const domain = requireEnv("AUTH0_DOMAIN")
+const secret = requireEnv("AUTH0_SECRET")
+const clientId = requireEnv("AUTH0_CLIENT_ID")
+const clientSecret = requireEnv("AUTH0_CLIENT_SECRET")
 
 const routes = {
   login: "/api/auth/login",
@@ -35,7 +30,7 @@ const routes = {
 }
 
 const authorizationParameters = {
-  audience: process.env.AUTH0_AUDIENCE ?? "https://api.fascinantedigital.com",
+  audience: requireEnv("AUTH0_AUDIENCE"),
 }
 
 let cachedClient: Auth0Client | undefined
@@ -46,10 +41,10 @@ export function getAuth0Client() {
   }
 
   cachedClient = new Auth0Client({
-    domain: domain ?? "",
-    clientId: clientId ?? "",
+    domain,
+    clientId,
     clientSecret,
-    secret: secret ?? "",
+    secret,
     appBaseUrl,
     routes,
     authorizationParameters,

@@ -10,14 +10,14 @@ Este es un **Access Token para Auth0 Management API** obtenido mediante **Client
 
 ### Datos Decodificados:
 
-- **Issuer (iss)**: `https://dev-xz2zgl2c0w6gfvbk.us.auth0.com/`
+- **Issuer (iss)**: `<AUTH0_ISSUER_BASE_URL>/`
   - Tu tenant de Auth0
 
 - **Subject (sub)**: `ImAZkxhgekDXzV6tqNyVMXnqJxAHkUQ1@clients`
   - Client ID de "Fascinante API M2M (DEV)"
   - Indica que es un token M2M
 
-- **Audience (aud)**: `https://dev-xz2zgl2c0w6gfvbk.us.auth0.com/api/v2/`
+- **Audience (aud)**: `<AUTH0_ISSUER_BASE_URL>/api/v2/`
   - ✅ **Auth0 Management API**
   - Este token es para usar Management API (no para tu API custom)
 
@@ -44,7 +44,7 @@ Este es un **Access Token para Auth0 Management API** obtenido mediante **Client
 
 1. **Llamar a Auth0 Management API**
    ```javascript
-   fetch('https://dev-xz2zgl2c0w6gfvbk.us.auth0.com/api/v2/clients', {
+   fetch('<AUTH0_ISSUER_BASE_URL>/api/v2/clients', {
      headers: {
        'Authorization': `Bearer ${managementToken}`
      }
@@ -73,7 +73,7 @@ Este es un **Access Token para Auth0 Management API** obtenido mediante **Client
 
 | Característica | Token #1 (Anterior) | Token #2 (Este) |
 |----------------|---------------------|-----------------|
-| **Audience** | `https://api.fascinantedigital.com` | `https://...auth0.com/api/v2/` |
+| **Audience** | `<AUTH0_AUDIENCE>` | `https://...auth0.com/api/v2/` |
 | **Para** | Tu API backend (Fascinante API) | Auth0 Management API |
 | **Scopes** | No tiene (o pocos) | 200+ scopes |
 | **Uso** | Llamar a tu API | Administrar Auth0 |
@@ -87,7 +87,7 @@ Este es un **Access Token para Auth0 Management API** obtenido mediante **Client
 async function updateBranding() {
   try {
     const response = await fetch(
-      'https://dev-xz2zgl2c0w6gfvbk.us.auth0.com/api/v2/branding',
+      '<AUTH0_ISSUER_BASE_URL>/api/v2/branding',
       {
         method: 'PATCH',
         headers: {
@@ -177,7 +177,7 @@ Este token:
 - Administración del tenant
 
 **El ejemplo de código que mostraste necesita ajustarse:**
-- URL: Cambiar a `https://dev-xz2zgl2c0w6gfvbk.us.auth0.com/api/v2/...`
+- URL: Cambiar a `<AUTH0_ISSUER_BASE_URL>/api/v2/...`
 - Endpoint: Depende de qué quieras hacer (branding, clients, users, etc.)
 
 ---

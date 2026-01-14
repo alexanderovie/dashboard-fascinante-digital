@@ -52,7 +52,7 @@ Los colores se extrajeron de `src/app/globals.css` (modo claro) y se mapearon a 
 2. **Dominio de Auth0** configurado:
    ```bash
    # En .env.local
-   AUTH0_DOMAIN=auth.fascinantedigital.com
+   AUTH0_DOMAIN=<AUTH0_DOMAIN>
    ```
 
 ### Ejecutar el Script
@@ -141,7 +141,7 @@ Después de ejecutar el script:
 
 2. **Prueba el login real**:
    ```
-   https://auth.fascinantedigital.com/authorize
+   <AUTH0_ISSUER_BASE_URL>/authorize
    ```
 
 3. **Verifica que**:

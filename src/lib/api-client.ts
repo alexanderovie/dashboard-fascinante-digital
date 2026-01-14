@@ -1,5 +1,13 @@
 import { getAccessToken } from "@auth0/nextjs-auth0"
 
+const requireEnv = (name: string) => {
+  const value = process.env[name]
+  if (!value) {
+    throw new Error(`Missing required env var: ${name}`)
+  }
+  return value
+}
+
 type ApiClientOptions = RequestInit & {
   audience?: string
   organizationId?: string
@@ -25,8 +33,7 @@ export async function authenticatedFetch<T = unknown>(
   path: string,
   options: ApiClientOptions = {}
 ): Promise<T> {
-  const audience =
-    options.audience ?? process.env.AUTH0_AUDIENCE ?? "https://api.fascinantedigital.com"
+  const audience = options.audience ?? requireEnv("AUTH0_AUDIENCE")
 
   // Obtener access token de forma segura
   let accessToken: string | undefined

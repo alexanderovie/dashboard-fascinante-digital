@@ -30,9 +30,9 @@ Tu proyecto está **100% configurado y listo para desarrollo** con:
 ✅ AUTH0_CLIENT_ID: FVcaHC6WkzqZLMdiSWvISUMmqWuzRtE7
 ✅ AUTH0_CLIENT_SECRET: Configurado
 ✅ AUTH0_SECRET: Generado automáticamente
-✅ AUTH0_DOMAIN: dev-xz2zgl2c0w6gfvbk.us.auth0.com
-✅ AUTH0_ISSUER_BASE_URL: https://dev-xz2zgl2c0w6gfvbk.us.auth0.com
-✅ AUTH0_AUDIENCE: https://api.fascinantedigital.com
+✅ AUTH0_DOMAIN: <AUTH0_DOMAIN>
+✅ AUTH0_ISSUER_BASE_URL: <AUTH0_ISSUER_BASE_URL>
+✅ AUTH0_AUDIENCE: <AUTH0_AUDIENCE>
 ✅ AUTH0_BASE_URL: http://localhost:3000
 ✅ APP_BASE_URL: http://localhost:3000
 ✅ NEXT_PUBLIC_API_BASE_URL: http://localhost:4000
@@ -71,7 +71,7 @@ Tu proyecto está **100% configurado y listo para desarrollo** con:
 
 #### 3. **Fascinante API**
 - **Name**: Fascinante API
-- **Identifier**: `https://api.fascinantedigital.com`
+- **Identifier**: `<AUTH0_AUDIENCE>`
 - **Uso**: Audience para validación de JWT
 - **Backend**: Google Cloud (api.fascinantedigital.com)
 
@@ -167,7 +167,7 @@ import jwt from 'jsonwebtoken';
 import jwksClient from 'jwks-rsa';
 
 const client = jwksClient({
-  jwksUri: 'https://dev-xz2zgl2c0w6gfvbk.us.auth0.com/.well-known/jwks.json'
+  jwksUri: '<AUTH0_ISSUER_BASE_URL>/.well-known/jwks.json'
 });
 
 function getKey(header, callback) {
@@ -182,8 +182,8 @@ function validateToken(req, res, next) {
   const token = req.headers.authorization?.replace('Bearer ', '');
 
   jwt.verify(token, getKey, {
-    audience: 'https://api.fascinantedigital.com',
-    issuer: 'https://dev-xz2zgl2c0w6gfvbk.us.auth0.com/',
+    audience: '<AUTH0_AUDIENCE>',
+    issuer: '<AUTH0_ISSUER_BASE_URL>/',
     algorithms: ['RS256']
   }, (err, decoded) => {
     if (err) {
@@ -242,7 +242,7 @@ function validateOrg(req, res, next) {
 │         └────────────────┼───────────────────┘              │
 │                          ↓                                   │
 │                    AUTH0 TENANT                              │
-│         (dev-xz2zgl2c0w6gfvbk.us.auth0.com)                 │
+│         (<AUTH0_DOMAIN>)                 │
 └────────────────────────────┬─────────────────────────────────┘
                              │
                              ↓ (Access Token con audience)

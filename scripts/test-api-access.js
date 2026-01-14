@@ -10,21 +10,25 @@
 
 const https = require('https');
 
-const AUTH0_DOMAIN = process.env.AUTH0_DOMAIN || 'auth.fascinantedigital.com';
-const AUTH0_MANAGEMENT_TOKEN = process.env.AUTH0_MANAGEMENT_TOKEN || '';
-const CLIENT_ID = process.env.AUTH0_CLIENT_ID || 'FVcaHC6WkzqZLMdiSWvISUMmqWuzRtE7';
-const FASCINANTE_API = 'https://api.fascinantedigital.com';
+const requireEnv = (name) => {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(`Missing required env var: ${name}`);
+  }
+  return value;
+};
+
+const AUTH0_DOMAIN = requireEnv('AUTH0_DOMAIN');
+const AUTH0_MANAGEMENT_TOKEN = requireEnv('AUTH0_MANAGEMENT_TOKEN');
+const CLIENT_ID = requireEnv('AUTH0_CLIENT_ID');
+const FASCINANTE_API = requireEnv('AUTH0_AUDIENCE');
 
 function testManagementAPI() {
   return new Promise((resolve, reject) => {
-    if (!AUTH0_MANAGEMENT_TOKEN) {
-      reject(new Error('AUTH0_MANAGEMENT_TOKEN no configurado'));
-      return;
-    }
+  const domain = AUTH0_DOMAIN.startsWith('http')
+    ? new URL(AUTH0_DOMAIN).hostname
+    : AUTH0_DOMAIN;
 
-    const domain = AUTH0_DOMAIN.startsWith('http') 
-      ? new URL(AUTH0_DOMAIN).hostname 
-      : AUTH0_DOMAIN;
 
     const apiUrl = `https://${domain}/api/v2/clients/${CLIENT_ID}`;
     
@@ -98,36 +102,27 @@ async function main() {
   console.log('🔍 PRUEBA 1: Auth0 Management API');
   console.log('─'.repeat(60));
   
-  if (!AUTH0_MANAGEMENT_TOKEN) {
-    console.log('⚠️  AUTH0_MANAGEMENT_TOKEN no configurado');
-    console.log('');
-    console.log('Para probar Management API:');
-    console.log('1. Obtén un token de Management API');
-    console.log('2. Agrega a .env.local: AUTH0_MANAGEMENT_TOKEN=tu_token');
-    console.log('');
-  } else {
-    try {
-      const result = await testManagementAPI();
-      if (result.success) {
-        console.log('✅ ACCESO A MANAGEMENT API: FUNCIONA');
-        console.log(`   Application: ${result.data.name || 'N/A'}`);
-        console.log(`   Client ID: ${result.data.client_id || 'N/A'}`);
-        console.log(`   Type: ${result.data.app_type || 'N/A'}`);
-        console.log('');
-        console.log('✅ La aplicación tiene acceso a Management API');
-      } else {
-        console.log(`❌ ACCESO DENEGADO (Status: ${result.status})`);
-        if (result.status === 401) {
-          console.log('   El token puede haber expirado o ser inválido');
-        } else if (result.status === 403) {
-          console.log('   El token no tiene permisos suficientes');
-        }
-        console.log('');
+  try {
+    const result = await testManagementAPI();
+    if (result.success) {
+      console.log('✅ ACCESO A MANAGEMENT API: FUNCIONA');
+      console.log(`   Application: ${result.data.name || 'N/A'}`);
+      console.log(`   Client ID: ${result.data.client_id || 'N/A'}`);
+      console.log(`   Type: ${result.data.app_type || 'N/A'}`);
+      console.log('');
+      console.log('✅ La aplicación tiene acceso a Management API');
+    } else {
+      console.log(`❌ ACCESO DENEGADO (Status: ${result.status})`);
+      if (result.status === 401) {
+        console.log('   El token puede haber expirado o ser inválido');
+      } else if (result.status === 403) {
+        console.log('   El token no tiene permisos suficientes');
       }
-    } catch (error) {
-      console.log(`❌ ERROR: ${error.message}`);
       console.log('');
     }
+  } catch (error) {
+    console.log(`❌ ERROR: ${error.message}`);
+    console.log('');
   }
 
   // Prueba 2: Fascinante API
@@ -137,7 +132,7 @@ async function main() {
   console.log('⚠️  Y un usuario autenticado para obtener access token');
   console.log('');
   console.log('📋 Estado actual:');
-  console.log('   - API: https://api.fascinantedigital.com');
+  console.log(`   - API: ${FASCINANTE_API}`);
   console.log('   - Status: ❌ Unauthorized (debes autorizarla)');
   console.log('');
   console.log('✅ Para probar Fascinante API:');

@@ -11,8 +11,16 @@
 const https = require('https');
 const http = require('http');
 
-const AUTH0_DOMAIN = process.env.AUTH0_DOMAIN || 'auth.fascinantedigital.com';
-const AUDIENCE = 'https://api.fascinantedigital.com';
+const requireEnv = (name) => {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(`Missing required env var: ${name}`);
+  }
+  return value;
+};
+
+const AUTH0_DOMAIN = requireEnv('AUTH0_DOMAIN');
+const AUDIENCE = requireEnv('AUTH0_AUDIENCE');
 
 async function testAccessToken() {
   console.log('╔════════════════════════════════════════════════════════════════╗');

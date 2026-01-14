@@ -5,10 +5,10 @@
 ### ✅ Variables que TIENES:
 
 ```bash
-AUTH0_DOMAIN=auth.fascinantedigital.com
+AUTH0_DOMAIN=<AUTH0_DOMAIN>
 AUTH0_CLIENT_ID=FVcaHC6WkzqZLMdiSWvISUMmqWuzRtE7
 AUTH0_CLIENT_SECRET=*** (configurado)
-AUTH0_ISSUER_BASE_URL=https://auth.fascinantedigital.com
+AUTH0_ISSUER_BASE_URL=<AUTH0_ISSUER_BASE_URL>
 ```
 
 ### ❌ Variables que FALTAN:
@@ -44,12 +44,12 @@ Usa Auth0 Dashboard o API para generar un token con scopes necesarios:
 auth0 api get --scope "read:clients read:users update:branding"
 
 # Opción 2: Usar curl (necesitas credenciales M2M)
-curl -X POST https://auth.fascinantedigital.com/oauth/token \
+curl -X POST <AUTH0_ISSUER_BASE_URL>/oauth/token \
   -H "Content-Type: application/json" \
   -d '{
     "client_id": "TU_M2M_CLIENT_ID",
     "client_secret": "TU_M2M_CLIENT_SECRET",
-    "audience": "https://auth.fascinantedigital.com/api/v2/",
+    "audience": "<AUTH0_ISSUER_BASE_URL>/api/v2/",
     "grant_type": "client_credentials"
   }'
 ```
@@ -100,7 +100,7 @@ AUTH0_M2M_CLIENT_SECRET=tu_secret_aqui
 Auth0 CLI necesita estas variables:
 
 ```bash
-export AUTH0_DOMAIN=auth.fascinantedigital.com
+export AUTH0_DOMAIN=<AUTH0_DOMAIN>
 export AUTH0_CLIENT_ID=TU_M2M_CLIENT_ID
 export AUTH0_CLIENT_SECRET=TU_M2M_CLIENT_SECRET
 ```
@@ -139,7 +139,7 @@ echo "AUTH0_MANAGEMENT_TOKEN=tu_token_aqui" >> .env.local
 auth0 login
 
 # Opción 2: Variables de entorno
-export AUTH0_DOMAIN=auth.fascinantedigital.com
+export AUTH0_DOMAIN=<AUTH0_DOMAIN>
 export AUTH0_CLIENT_ID=ImAZkxhgekDXV6tqNyVMXnqJxAHkUQ1
 export AUTH0_CLIENT_SECRET=tu_secret
 ```

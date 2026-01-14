@@ -13,10 +13,18 @@
 
 const https = require('https');
 
+const requireEnv = (name) => {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(`Missing required env var: ${name}`);
+  }
+  return value;
+};
+
 // Configuración
-const AUTH0_DOMAIN = process.env.AUTH0_DOMAIN || 'auth.fascinantedigital.com';
-const AUTH0_MANAGEMENT_TOKEN = process.env.AUTH0_MANAGEMENT_TOKEN || '';
-const CLIENT_ID = process.env.AUTH0_CLIENT_ID || 'FVcaHC6WkzqZLMdiSWvISUMmqWuzRtE7';
+const AUTH0_DOMAIN = requireEnv('AUTH0_DOMAIN');
+const AUTH0_MANAGEMENT_TOKEN = requireEnv('AUTH0_MANAGEMENT_TOKEN');
+const CLIENT_ID = requireEnv('AUTH0_CLIENT_ID');
 
 function getClient() {
   return new Promise((resolve, reject) => {
@@ -113,18 +121,6 @@ function updateLogoutUrls(currentUrls, newUrl) {
 }
 
 async function main() {
-  if (!AUTH0_MANAGEMENT_TOKEN) {
-    console.error('❌ Error: AUTH0_MANAGEMENT_TOKEN no configurado');
-    console.error('');
-    console.error('Para obtener el token:');
-    console.error('1. Ve a Auth0 Dashboard → Applications → APIs → Auth0 Management API');
-    console.error('2. Crea una Machine to Machine Application');
-    console.error('3. Otorga permisos: read:clients update:clients');
-    console.error('4. Copia el Access Token y agrégalo a .env.local:');
-    console.error('   AUTH0_MANAGEMENT_TOKEN=tu_token_aqui');
-    process.exit(1);
-  }
-
   const REQUIRED_URL = 'https://fascinantedigital.com';
 
   console.log('🔍 Verificando Allowed Logout URLs...');

@@ -9,12 +9,12 @@
 ### Error observado:
 ```
 "Oops!, something went wrong"
-Tenant: dev-xz2zgl2c0w6gfvbk
+Tenant: <AUTH0_DOMAIN>
 ```
 
 ### URL de logout generada:
 ```
-https://auth.fascinantedigital.com/oidc/logout?
+<AUTH0_ISSUER_BASE_URL>/oidc/logout?
   client_id=FVcaHC6WkzqZLMdiSWvISUMmqWuzRtE7&
   post_logout_redirect_uri=https%3A%2F%2Ffascinantedigital.com
 ```
@@ -23,7 +23,7 @@ https://auth.fascinantedigital.com/oidc/logout?
 ```bash
 GET /api/auth/logout?returnTo=https%3A%2F%2Ffascinantedigital.com
 → 307 Redirect
-→ Location: https://auth.fascinantedigital.com/oidc/logout?...
+→ Location: <AUTH0_ISSUER_BASE_URL>/oidc/logout?...
 ```
 
 ✅ El SDK está construyendo correctamente la URL
@@ -85,7 +85,7 @@ Y asegúrate de que esa URL esté en **Allowed Logout URLs**.
 curl -v "http://localhost:3000/api/auth/logout?returnTo=https%3A%2F%2Ffascinantedigital.com"
 
 # Debe mostrar:
-# Location: https://auth.fascinantedigital.com/oidc/logout?...
+# Location: <AUTH0_ISSUER_BASE_URL>/oidc/logout?...
 ```
 
 ### Verificar cookies después del logout:

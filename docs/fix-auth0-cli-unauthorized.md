@@ -57,7 +57,7 @@ El CLI puede tener problemas con dominios personalizados. Prueba usar el dominio
 ```bash
 auth0 login
 # Cuando pida Domain, usa:
-dev-xz2zgl2c0w6gfvbk.us.auth0.com
+<AUTH0_DOMAIN>
 ```
 
 **Opción B: Configurar dominio personalizado en CLI**
@@ -118,7 +118,7 @@ Si el dominio personalizado causa problemas:
 ```bash
 auth0 login
 # Selecciona: "As a machine"
-# Domain: dev-xz2zgl2c0w6gfvbk.us.auth0.com (dominio original)
+# Domain: <AUTH0_DOMAIN> (dominio original)
 # Client ID: ImAZkxhgekDXV6tqNyVMXnqJxAHkUQ1
 # Client Secret: (tu_secret)
 ```
@@ -130,12 +130,12 @@ auth0 login
 Prueba obtener un token directamente:
 
 ```bash
-curl -X POST https://auth.fascinantedigital.com/oauth/token \
+curl -X POST <AUTH0_ISSUER_BASE_URL>/oauth/token \
   -H "Content-Type: application/json" \
   -d '{
     "client_id": "ImAZkxhgekDXV6tqNyVMXnqJxAHkUQ1",
     "client_secret": "TU_CLIENT_SECRET_AQUI",
-    "audience": "https://auth.fascinantedigital.com/api/v2/",
+    "audience": "<AUTH0_ISSUER_BASE_URL>/api/v2/",
     "grant_type": "client_credentials"
   }'
 ```
@@ -143,12 +143,12 @@ curl -X POST https://auth.fascinantedigital.com/oauth/token \
 **O con dominio original:**
 
 ```bash
-curl -X POST https://dev-xz2zgl2c0w6gfvbk.us.auth0.com/oauth/token \
+curl -X POST <AUTH0_ISSUER_BASE_URL>/oauth/token \
   -H "Content-Type: application/json" \
   -d '{
     "client_id": "ImAZkxhgekDXV6tqNyVMXnqJxAHkUQ1",
     "client_secret": "TU_CLIENT_SECRET_AQUI",
-    "audience": "https://dev-xz2zgl2c0w6gfvbk.us.auth0.com/api/v2/",
+    "audience": "<AUTH0_ISSUER_BASE_URL>/api/v2/",
     "grant_type": "client_credentials"
   }'
 ```

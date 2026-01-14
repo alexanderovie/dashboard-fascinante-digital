@@ -20,7 +20,7 @@ Tu token de Auth0 Management API tiene los siguientes permisos:
 ```bash
 # Agregar a .env.local
 AUTH0_MANAGEMENT_TOKEN=tu_token_jwt_aqui
-AUTH0_DOMAIN=auth.fascinantedigital.com
+AUTH0_DOMAIN=<AUTH0_DOMAIN>
 ```
 
 ### Paso 2: Editar Configuración
@@ -52,7 +52,7 @@ node scripts/update-auth0-branding.js
 ### Obtener Configuración Actual
 
 ```bash
-curl -X GET 'https://auth.fascinantedigital.com/api/v2/branding' \
+curl -X GET '<AUTH0_ISSUER_BASE_URL>/api/v2/branding' \
   -H 'Authorization: Bearer TU_TOKEN_AQUI' \
   -H 'Accept: application/json'
 ```
@@ -60,7 +60,7 @@ curl -X GET 'https://auth.fascinantedigital.com/api/v2/branding' \
 ### Actualizar Branding
 
 ```bash
-curl -X PATCH 'https://auth.fascinantedigital.com/api/v2/branding' \
+curl -X PATCH '<AUTH0_ISSUER_BASE_URL>/api/v2/branding' \
   -H 'Authorization: Bearer TU_TOKEN_AQUI' \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
@@ -115,13 +115,13 @@ https://fonts.gstatic.com/s/roboto/v32/KFOmCnqEu92Fr1Mu4mxP.woff2
 
 ### GET Branding Settings
 ```
-GET https://auth.fascinantedigital.com/api/v2/branding
+GET <AUTH0_ISSUER_BASE_URL>/api/v2/branding
 Scope requerido: read:branding
 ```
 
 ### PATCH Branding Settings
 ```
-PATCH https://auth.fascinantedigital.com/api/v2/branding
+PATCH <AUTH0_ISSUER_BASE_URL>/api/v2/branding
 Scope requerido: update:branding
 Content-Type: application/json
 ```
@@ -161,7 +161,7 @@ Después de actualizar, verifica en:
    Usa "Example screens for preview" en el dashboard
 
 3. **Login real:**
-   https://auth.fascinantedigital.com/authorize
+   <AUTH0_ISSUER_BASE_URL>/authorize
 
 ## 📝 Notas
 

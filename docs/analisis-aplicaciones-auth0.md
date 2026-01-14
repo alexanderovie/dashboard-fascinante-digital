@@ -55,7 +55,7 @@
 
 #### 3. **Fascinante API** (Custom API) ✅
 - **Tipo**: Custom API
-- **Audience**: `https://api.fascinantedigital.com`
+- **Audience**: `<AUTH0_AUDIENCE>`
 - **Estado**: ✅ Existe y está configurada
 - **¿Se usa?**: ✅ **SÍ, esta es tu API backend**
 - **Configurado en**: `.env.local` como `AUTH0_AUDIENCE`
@@ -116,7 +116,7 @@
 ```bash
 auth0 login
 # Selecciona: "As a machine"
-# Domain: dev-xz2zgl2c0w6gfvbk.us.auth0.com (o auth.fascinantedigital.com)
+# Domain: <AUTH0_DOMAIN> (o <AUTH0_DOMAIN>)
 # Client ID: ImAZkxhgekDXV6tqNyVMXnqJxAHkUQ1
 # Client Secret: (tu_secret)
 ```

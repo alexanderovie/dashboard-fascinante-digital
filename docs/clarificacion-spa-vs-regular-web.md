@@ -120,7 +120,7 @@ https://dashboard-fascinante-digital.vercel.app
 ### 3️⃣ Backend/API
 
 ```
-https://api.fascinantedigital.com
+<AUTH0_AUDIENCE>
 ```
 
 - ✅ Usa: **"Fascinante API M2M (DEV)"** (Machine to Machine)

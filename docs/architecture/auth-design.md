@@ -149,13 +149,13 @@ AUTH0_CLIENT_ID=your_auth0_client_id
 AUTH0_CLIENT_SECRET=your_auth0_client_secret
 AUTH0_SECRET=use_openssl_rand_hex_32_to_generate
 AUTH0_BASE_URL=http://localhost:3000
-AUTH0_DOMAIN=your-tenant.us.auth0.com
-AUTH0_ISSUER_BASE_URL=https://your-tenant.us.auth0.com
-AUTH0_AUDIENCE=https://api.fascinantedigital.com
+AUTH0_DOMAIN=<AUTH0_DOMAIN>
+AUTH0_ISSUER_BASE_URL=<AUTH0_ISSUER_BASE_URL>
+AUTH0_AUDIENCE=<AUTH0_AUDIENCE>
 
 # Application
 APP_BASE_URL=http://localhost:3000
-NEXT_PUBLIC_API_BASE_URL=https://api.fascinantedigital.com
+NEXT_PUBLIC_API_BASE_URL=<AUTH0_AUDIENCE>
 
 # Multi-tenant (opcional)
 DEFAULT_ORGANIZATION_ID=org_abc123
@@ -184,7 +184,7 @@ openssl rand -hex 32
    - ✅ OIDC Conformant: Enabled
    - ✅ PKCE: Enabled
 6. Crear **API** en Auth0:
-   - Identifier: `https://api.fascinantedigital.com`
+   - Identifier: `<AUTH0_AUDIENCE>`
    - ✅ Enable RBAC
    - ✅ Add Permissions in the Access Token
 7. Crear **Roles** y **Permissions**:
@@ -508,10 +508,10 @@ AUTH0_CLIENT_ID=...
 AUTH0_CLIENT_SECRET=... # Secret Manager recomendado
 AUTH0_SECRET=... # Secret Manager recomendado
 AUTH0_BASE_URL=https://your-app.run.app
-AUTH0_DOMAIN=your-tenant.us.auth0.com
-AUTH0_ISSUER_BASE_URL=https://your-tenant.us.auth0.com
-AUTH0_AUDIENCE=https://api.fascinantedigital.com
-NEXT_PUBLIC_API_BASE_URL=https://api.fascinantedigital.com
+AUTH0_DOMAIN=<AUTH0_DOMAIN>
+AUTH0_ISSUER_BASE_URL=<AUTH0_ISSUER_BASE_URL>
+AUTH0_AUDIENCE=<AUTH0_AUDIENCE>
+NEXT_PUBLIC_API_BASE_URL=<AUTH0_AUDIENCE>
 DEFAULT_ORGANIZATION_ID=org_abc123
 NODE_ENV=production
 ```

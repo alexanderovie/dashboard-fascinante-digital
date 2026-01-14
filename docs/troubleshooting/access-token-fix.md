@@ -56,8 +56,8 @@ Cuando el backend API esté disponible:
    ```
 
 2. Verificar que el backend valida JWT correctamente:
-   - Audience: `https://api.fascinantedigital.com`
-   - Issuer: `https://dev-xz2zgl2c0w6gfvbk.us.auth0.com/`
+   - Audience: `<AUTH0_AUDIENCE>`
+   - Issuer: `<AUTH0_ISSUER_BASE_URL>/`
 
 ---
 

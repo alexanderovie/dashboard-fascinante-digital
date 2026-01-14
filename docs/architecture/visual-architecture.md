@@ -200,7 +200,7 @@ Este documento proporciona diagramas visuales de la arquitectura de autenticaci√
   "payload": {
     "iss": "https://your-tenant.us.auth0.com/",
     "sub": "auth0|507f1f77bcf86cd799439011",
-    "aud": "https://api.fascinantedigital.com",
+    "aud": "<AUTH0_AUDIENCE>",
     "azp": "your_client_id",
     "exp": 1736467634,
     "iat": 1736381234,

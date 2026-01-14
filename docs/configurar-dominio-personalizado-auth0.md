@@ -14,13 +14,13 @@
 
 1. En la página de **Tenant Settings** que estás viendo
 2. Haz clic en la pestaña **"Custom Domains"** (está a la derecha de "General")
-3. Deberías ver tu dominio `auth.fascinantedigital.com`
+3. Deberías ver tu dominio `<AUTH0_DOMAIN>`
 
 ### Paso 2: Verificar Estado del Dominio
 
 En la pestaña "Custom Domains" deberías ver:
 
-- ✅ **Domain:** `auth.fascinantedigital.com`
+- ✅ **Domain:** `<AUTH0_DOMAIN>`
 - ✅ **Status:** "Ready" o "Active"
 - ✅ **TLS:** "Valid" o "Active"
 
@@ -36,7 +36,7 @@ Después de activar el dominio personalizado:
 
 1. Vuelve a la pestaña **"General"**
 2. Busca una sección que diga **"Default Domain"** o **"Custom Domain"**
-3. Debería mostrar: `auth.fascinantedigital.com`
+3. Debería mostrar: `<AUTH0_DOMAIN>`
 
 ---
 
@@ -56,10 +56,10 @@ Lo que importa es:
 
 ## 🔍 Si el Dominio No Aparece en "Custom Domains"
 
-Si no ves `auth.fascinantedigital.com` en la pestaña "Custom Domains":
+Si no ves `<AUTH0_DOMAIN>` en la pestaña "Custom Domains":
 
 1. Haz clic en **"Create Custom Domain"** o **"Add Domain"**
-2. Ingresa: `auth.fascinantedigital.com`
+2. Ingresa: `<AUTH0_DOMAIN>`
 3. Sigue las instrucciones para:
    - Configurar DNS (CNAME)
    - Verificar el dominio
@@ -73,15 +73,15 @@ Después de configurar:
 
 1. Limpia cache del navegador (Ctrl+Shift+Del)
 2. Abre en modo incógnito: `http://localhost:3000/login`
-3. Deberías ser redirigido a: `https://auth.fascinantedigital.com/authorize`
-4. El login debería mostrar: "Iniciar sesión en auth.fascinantedigital.com"
+3. Deberías ser redirigido a: `<AUTH0_ISSUER_BASE_URL>/authorize`
+4. El login debería mostrar: "Iniciar sesión en <AUTH0_DOMAIN>"
 
 ---
 
 ## 📋 Checklist
 
 - [ ] Ir a pestaña "Custom Domains"
-- [ ] Verificar que `auth.fascinantedigital.com` esté listado
+- [ ] Verificar que `<AUTH0_DOMAIN>` esté listado
 - [ ] Verificar que el estado sea "Ready" o "Active"
 - [ ] Activar como dominio predeterminado (si hay opción)
 - [ ] Limpiar cache del navegador

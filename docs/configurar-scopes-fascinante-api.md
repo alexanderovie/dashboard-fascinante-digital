@@ -124,7 +124,7 @@ Después de configurar, puedes verificar en tu app:
 import { getAccessToken } from "@auth0/nextjs-auth0"
 
 const tokenResponse = await getAccessToken({
-  audience: "https://api.fascinantedigital.com"
+  audience: "<AUTH0_AUDIENCE>"
 })
 
 // El token debería incluir los scopes en el claim 'scope'
