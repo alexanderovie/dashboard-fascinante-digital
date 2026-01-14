@@ -76,6 +76,8 @@ jobs:
   auth-tests:
     name: Authentication Tests
     runs-on: ubuntu-latest
+    env:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
     steps:
       - name: Checkout code
@@ -113,7 +115,7 @@ jobs:
 
       # TODO: Re-enable strict coverage upload when Codecov token is configured.
       - name: Upload coverage to Codecov
-        if: steps.auth_tests.outputs.run_tests == 'true' && secrets.CODECOV_TOKEN != ''
+        if: steps.auth_tests.outputs.run_tests == 'true' && env.CODECOV_TOKEN != ''
         uses: codecov/codecov-action@v4
         continue-on-error: true
         with:
@@ -183,8 +185,10 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: true
     needs: [dependency-audit, lint-security, auth-tests, docker-scan]
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     # Only notify when Slack webhook is configured.
-    if: failure() && secrets.SLACK_WEBHOOK_URL != ''
+    if: failure() && env.SLACK_WEBHOOK_URL != ''
 
     steps:
       - name: Send Slack notification
